@@ -1,5 +1,5 @@
 server:
-  port: ${SERVER_PORT:8083}
+  port: ${SERVER_PORT:80}
   servlet:
     context-path: /gateway
 spring:
@@ -43,6 +43,10 @@ spring:
             - Path=/openfeign/**
 #          filters:
 #            - StripPrefix=1
+        - id: loadbalancer
+          uri: lb://loadbalancer
+          predicates:
+            - Path=/loadbalancer/**
 
 ## swagger自定义配置属性
 swagger:
