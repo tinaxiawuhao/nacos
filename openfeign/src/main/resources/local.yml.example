@@ -1,0 +1,29 @@
+server:
+  port: ${SERVER_PORT:8082}
+  servlet:
+    context-path: /openfeign
+spring:
+  application:
+    name: openfeign
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:mysql://${DATASOURCE_URL:127.0.0.1:3306/nacos}?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai&rewriteBatchedStatements=true
+    username: ${DATASOURCE_USERNAME:root}
+    password: ${DATASOURCE_PASSWORD:123456}
+    hikari:
+      minimum-idle: 5
+      maximum-pool-size: 15
+      auto-commit: true
+      idle-timeout: 30000
+      pool-name: MyHikariCP
+      max-lifetime: 1800000
+      connection-timeout: 10000
+      connection-test-query: SELECT 1
+
+## swagger自定义配置属性
+swagger:
+  enabled: true
+  title: openfeign在线接口平台
+  description: openfeign服务相关接口
+

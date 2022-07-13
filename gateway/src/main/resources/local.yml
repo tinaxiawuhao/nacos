@@ -1,0 +1,52 @@
+server:
+  port: ${SERVER_PORT:8083}
+  servlet:
+    context-path: /gateway
+spring:
+  application:
+    name: gateway
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:mysql://${DATASOURCE_URL:127.0.0.1:3306/nacos}?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai&rewriteBatchedStatements=true
+    username: ${DATASOURCE_USERNAME:root}
+    password: ${DATASOURCE_PASSWORD:123456}
+    hikari:
+      minimum-idle: 5
+      maximum-pool-size: 15
+      auto-commit: true
+      idle-timeout: 30000
+      pool-name: MyHikariCP
+      max-lifetime: 1800000
+      connection-timeout: 10000
+      connection-test-query: SELECT 1
+
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          #表明gateway开启服务注册和发现的功能，并且spring cloud gateway自动根据服务发现为每一个服务创建了一个router，这个router将以服务名开头的请求路径转发到对应的服务
+          enabled: true
+          #是将请求路径上的服务名配置为小写（因为服务注册的时候，向注册中心注册时将服务名转成大写的了
+          lower-case-service-id: true
+      routes:
+        - id: provide
+          uri: lb://provide
+          predicates:
+            - Path=/provide/**
+#          filters:
+#            # 作用是去掉请求路径的最前面n个
+#            - StripPrefix=1
+        - id: openfeign
+          uri: lb://openfeign
+          predicates:
+            - Path=/openfeign/**
+#          filters:
+#            - StripPrefix=1
+
+## swagger自定义配置属性
+swagger:
+  enabled: true
+  title: gateway在线接口平台
+  description: gateway服务相关接口
+
