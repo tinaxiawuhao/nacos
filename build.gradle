@@ -3,7 +3,7 @@ buildscript {
         //定义一个变量，统一规定springboot的版本
         set('springCloudVersion', "Hoxton.RELEASE")
         set('springBootVersion', "2.3.7.RELEASE")
-        set('alibabaVersion', "2.2.2.RELEASE")
+        set('alibabaVersion', "2021.1")
         set('lombok', "1.18.16")
         set('knife4j', "2.0.9")
         set('hutool', "4.6.3")

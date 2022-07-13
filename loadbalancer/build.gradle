@@ -4,5 +4,7 @@ dependencies {
 	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
 	implementation 'com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-config'
 	implementation 'com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery'
-	implementation 'org.springframework.cloud:spring‐cloud‐starter‐loadbalancer:2.3.0'
+	// https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-loadbalancer
+	implementation 'org.springframework.cloud:spring-cloud-starter-loadbalancer:3.1.3'
+
 }
