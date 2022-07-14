@@ -44,8 +44,7 @@ public class DocumentationConfig implements SwaggerResourcesProvider {
             route.getPredicates().stream()
                     .filter(predicateDefinition -> ("Path").equalsIgnoreCase(predicateDefinition.getName()))
                     .forEach(predicateDefinition -> resources.add(swaggerResource(route.getId(),
-                            predicateDefinition.getArgs().get(NameUtils.GENERATED_NAME_PREFIX + "0")
-                                    .replace("/**", V2_API_URI))));
+                            predicateDefinition.getArgs().get(NameUtils.GENERATED_NAME_PREFIX + "0").replace("/**", V2_API_URI))));
         });
 //        routeLocator.getRoutes()
 //                .filter(route -> route.getUri().getHost() != null && route.getUri().getScheme().startsWith("http"))

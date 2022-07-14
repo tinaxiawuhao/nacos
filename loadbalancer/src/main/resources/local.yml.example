@@ -1,10 +1,6 @@
 server:
   port: ${SERVER_PORT:8083}
-  servlet:
-    context-path: /loadbalancer
 spring:
-  application:
-    name: loadbalancer
   mvc:
     pathmatch:
       # Springfox使用的路径匹配是基于AntPathMatcher的，而Spring Boot 2.6.X使用的是PathPatternMatcher

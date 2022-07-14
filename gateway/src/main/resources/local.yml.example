@@ -1,10 +1,6 @@
 server:
   port: ${SERVER_PORT:8084}
-  servlet:
-    context-path: /gateway
 spring:
-  application:
-    name: gateway
   mvc:
     pathmatch:
       # Springfox使用的路径匹配是基于AntPathMatcher的，而Spring Boot 2.6.X使用的是PathPatternMatcher
@@ -39,19 +35,27 @@ spring:
           uri: lb://provide
           predicates:
             - Path=/provide/**
-#          filters:
-#            # 作用是去掉请求路径的最前面n个
-#            - StripPrefix=1
+          filters:
+            # 作用是去掉请求路径的最前面n个
+            - StripPrefix=1
         - id: openfeign
           uri: lb://openfeign
           predicates:
             - Path=/openfeign/**
-#          filters:
-#            - StripPrefix=1
+          filters:
+            - StripPrefix=1
         - id: loadbalancer
           uri: lb://loadbalancer
           predicates:
             - Path=/loadbalancer/**
+          filters:
+            - StripPrefix=1
+        - id: rocketmq
+          uri: lb://rocketmq
+          predicates:
+            - Path=/rocketmq/**
+          filters:
+            - StripPrefix=1
 
 gateway:
   # 不校验websocket token

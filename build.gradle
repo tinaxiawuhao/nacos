@@ -9,6 +9,7 @@ buildscript {
         set('lombok', "1.18.16")
         set('knife4j', "2.0.9")
         set('hutool', "4.6.3")
+        set('rocketmq', "2.2.2")
     }
     repositories {
         mavenLocal()
