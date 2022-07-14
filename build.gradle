@@ -1,9 +1,11 @@
 buildscript {
     ext {
+        //spring-cloud-dependencies 2020.0.0 默认不在加载bootstrap 配置文件，
+        //如果项目中要用bootstrap 配置文件 需要手动添加spring-cloud-starter-bootstrap 依赖，不然启动项目会报错的。
+        set('springCloudVersion', "2021.0.3")
         //定义一个变量，统一规定springboot的版本
-        set('springCloudVersion', "Hoxton.RELEASE")
-        set('springBootVersion', "2.3.7.RELEASE")
-        set('alibabaVersion', "2021.1")
+        set('springBootVersion', "2.6.8")
+        set('alibabaVersion', "2.2.7.RELEASE")
         set('lombok', "1.18.16")
         set('knife4j', "2.0.9")
         set('hutool', "4.6.3")
@@ -59,7 +61,14 @@ subprojects {
         implementation(enforcedPlatform("org.springframework.boot:spring-boot-dependencies:${springBootVersion}"))
         implementation "com.github.xiaoymin:knife4j-spring-boot-starter:${knife4j}"
         implementation "cn.hutool:hutool-all:${hutool}"
+        implementation 'org.springframework.boot:spring-boot-starter'
+        implementation 'com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-config'
+        implementation('com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery'){
+            exclude group: 'org.springframework.cloud', module: 'spring-cloud-starter-netflix-ribbon'
+        }
+        implementation 'org.springframework.cloud:spring-cloud-starter-bootstrap'
         compileOnly("org.projectlombok:lombok:${lombok}")
+        annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
         annotationProcessor("org.projectlombok:lombok:${lombok}")
         testImplementation("org.springframework.boot:spring-boot-starter-test:${springBootVersion}")
     }

@@ -1,10 +1,15 @@
 server:
-  port: ${SERVER_PORT:8080}
+  port: ${SERVER_PORT:8084}
   servlet:
     context-path: /gateway
 spring:
   application:
     name: gateway
+  mvc:
+    pathmatch:
+      # Springfox使用的路径匹配是基于AntPathMatcher的，而Spring Boot 2.6.X使用的是PathPatternMatcher
+      # 所以需要配置此参数
+      matching-strategy: ant_path_matcher
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     type: com.zaxxer.hikari.HikariDataSource
@@ -48,9 +53,10 @@ spring:
           predicates:
             - Path=/loadbalancer/**
 
-## swagger自定义配置属性
-swagger:
-  enabled: true
-  title: gateway在线接口平台
-  description: gateway服务相关接口
-
+gateway:
+  # 不校验websocket token
+  auth-ws-token: false
+  public-urls:
+    - /doc.html
+    - /**/v2/api-docs
+    - /**/favicon.ico
