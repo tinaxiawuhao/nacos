@@ -1,9 +1,6 @@
 spring:
   application:
     name: openfeign
-  mvc:
-    pathmatch:
-      matching-strategy: ant_path_matcher
   cloud:
     nacos:
       discovery:
