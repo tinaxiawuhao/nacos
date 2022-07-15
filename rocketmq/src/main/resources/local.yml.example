@@ -23,9 +23,12 @@ spring:
       connection-test-query: SELECT 1
 
 rocketmq:
-  name-server: localhost:9876
+  nameServer: localhost:9876
   producer:
     group: my-group
+    send-message-timeout: 30000
+    access-key:
+    secret-key:
 
 ## swagger自定义配置属性
 swagger:
