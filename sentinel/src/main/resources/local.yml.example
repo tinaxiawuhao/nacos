@@ -5,10 +5,16 @@ spring:
     sentinel:
       enabled: true
       transport:
-        port: 8086
+        port: 8719
         dashboard: 127.0.0.1:28080
         clientIp: 127.0.0.1
       log:
         dir: E:\study\nacos\sentinel\log
 
+ # 暴露的健康检查服务断点
+management:
+  endpoint:
+    web:
+      exposure:
+        include: '*'
 
