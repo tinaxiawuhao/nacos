@@ -6,6 +6,13 @@ spring:
       # Springfox使用的路径匹配是基于AntPathMatcher的，而Spring Boot 2.6.X使用的是PathPatternMatcher
       # 所以需要配置此参数
       matching-strategy: ant_path_matcher
+  zipkin:
+    base-url: http://127.0.0.1:9411 # zipkin服务地址
+    sender:
+      type: web # 数据收集方式：web、kafka、rabbit，我使用的是最简单的web，别的方式请自行学习
+  sleuth:
+    sampler:
+      probability: 1 # sleuth 日志记录采样率，1为100%，默认为0.1即10%，正式环境视情况修改该配置
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     type: com.zaxxer.hikari.HikariDataSource

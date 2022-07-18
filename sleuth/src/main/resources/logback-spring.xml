@@ -24,18 +24,20 @@
     <!-- 日志界别 -->
     <property name="log.level" value="info"/>
     <!-- 打印sql语句 需要指定dao层包的位置 -->
-    <property name="mapper.package" value="com.example.openfeign.mapper" />
+    <property name="mapper.package" value="com.example.sleuth.mapper" />
 
     <!--*****************************************************************************-->
     <!--自定义项 结束-->
     <!--*****************************************************************************-->
 
+    <conversionRule conversionWord="ip" converterClass="com.example.sleuth.utils.MySampleConverter" />
+
     <!-- ConsoleAppender 控制台输出日志 -->
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
-        <encoder>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
             <pattern>
-                <!-- 设置日志输出格式 -->
-                %d{yyyy-MM-dd HH:mm:ss.SSS} [%-5level] [%thread] %logger [%X{X-B3-TraceId:-}] - %msg%n
+                <!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符-->
+                %d{yyyy-MM-dd HH:mm:ss.SSS} %ip [%thread] %-5level %logger{50} [%X{X-B3-TraceId:-}] - %msg%n
             </pattern>
         </encoder>
     </appender>
